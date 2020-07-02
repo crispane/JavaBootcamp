@@ -28,8 +28,8 @@ public class CalculateAges{
 		for (int i = 0; i < name.length; i++) 
 		{ 
 			System.out.printf("Birth year of %s is %d. ", name[i], birthYear(age[i], currYear));
-			if (name[i].equals("me")) name[i] = "I";
-			if ( birthYear(age[i], currYear) > pastYear)
+			if (name[i].equals("me")) name[i] = "I";		//correct grammar
+			if ( birthYear(age[i], currYear) > pastYear) 	//check if unborn and print appropriate message
 				System.out.printf("In %d, %s will not be born for another %d years!", pastYear, name[i], birthYear(age[i], currYear)- pastYear);
 			else
 				System.out.printf("In %d, %s was %d years old.", pastYear, name[i], ageCalc(age[i], currYear, pastYear));
