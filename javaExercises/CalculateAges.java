@@ -3,7 +3,6 @@
 
 /* 
 * Exercise: 
-*
 * Create a program that calculates when you were born. 
 * Data given is the year we have and your age.
 * Do this for 3 more people. 
