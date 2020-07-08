@@ -61,6 +61,16 @@ import java.time.LocalDate; //import for getting current Year through LocalDate.
 public class Project0 {
 
 	public static void main(String[] args) {
+		int x = 5;
+		int y = x;
+		x = 6;
+		Integer z = 10;
+		Integer a = z;
+		z = 11;
+		System.out.println(x);
+		System.out.println(y);
+		System.out.println(z);
+		System.out.println(a);
 		Person person = PersonInit(); //Initialise person
 		person.Greetings(); //Greet person
 	}
