@@ -60,7 +60,7 @@ public class BankAccount {
 	}
 
 	public void printTransactions() {
-		System.out.print("Transactions of " + name + ":\n");
+		System.out.println("Transactions of " + name + ":");
 		for (int i = 0; i < transactions.size(); i++) {
 			System.out.println(transactions.get(i));
 		}
