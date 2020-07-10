@@ -9,15 +9,8 @@ package myhouse;
  *
  * @author f3nix
  */
-public class House {
-	String name = "myHouse!";
-	int x = 10;
+public class Class extends House{
+	House c = new House();
+	//c.xyz();
 	
-	public void xyz(){
-		System.out.println("asdfasdfghw");
-	}
-
-	public House() {
-	}
-
 }

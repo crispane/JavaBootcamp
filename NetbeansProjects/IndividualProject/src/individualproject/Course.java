@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myhouse;
+package individualproject;
+
+import java.util.Date;
 
 /**
  *
  * @author f3nix
  */
-public class House {
-	String name = "myHouse!";
-	int x = 10;
+public class Course {
+	String title;
+	String stream;
+	String type;
+	Date startDate;
+	Date endDate;
 	
-	public void xyz(){
-		System.out.println("asdfasdfghw");
-	}
-
-	public House() {
-	}
-
+	
 }

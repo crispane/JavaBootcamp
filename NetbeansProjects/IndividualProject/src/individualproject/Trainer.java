@@ -3,21 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myhouse;
+package individualproject;
 
 /**
  *
  * @author f3nix
  */
-public class House {
-	String name = "myHouse!";
-	int x = 10;
-	
-	public void xyz(){
-		System.out.println("asdfasdfghw");
-	}
-
-	public House() {
-	}
-
+public class Trainer {
+	String firstName;
+	String lastName;
+	String subject;
 }

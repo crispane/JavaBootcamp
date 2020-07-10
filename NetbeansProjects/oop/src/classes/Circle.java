@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myhouse;
+package classes;
 
 /**
  *
  * @author f3nix
  */
-public class House {
-	String name = "myHouse!";
-	int x = 10;
+public class Circle {
+	int x;
+	int y;
+	int r;
+	double p = 3.14;
 	
-	public void xyz(){
-		System.out.println("asdfasdfghw");
+	public double perimeter(){
+		return 2*p*r;
 	}
 
-	public House() {
+	public Circle(int x, int y, int r){
+		this.x = x;
+		this.y = y;
+		this.r = r;
 	}
-
 }

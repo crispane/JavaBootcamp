@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myhouse;
+package individualproject;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  *
  * @author f3nix
  */
-public class House {
-	String name = "myHouse!";
-	int x = 10;
+public class Student {
+	String firstName;
+	String lastName;
+	Date dateOfBirth;
+	BigDecimal tuitionFees;
 	
-	public void xyz(){
-		System.out.println("asdfasdfghw");
-	}
-
-	public House() {
-	}
-
 }

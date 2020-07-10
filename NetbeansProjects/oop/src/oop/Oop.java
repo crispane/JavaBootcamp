@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myhouse;
+package oop;
+
+import classes.Circle;
 
 /**
  *
  * @author f3nix
  */
-public class MyHouse {
+public class Oop {
 
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		House aHouse = new House();
-		aHouse.xyz();
-		System.out.println(aHouse.name);
-		aHouse.x = 20;
-		System.out.println(aHouse.x);
+		Circle c1 = new Circle(5, 6, 12);
+		System.out.println(c1. perimeter());
 	}
 	
 }
