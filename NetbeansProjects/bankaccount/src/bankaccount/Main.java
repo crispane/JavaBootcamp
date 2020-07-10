@@ -26,6 +26,12 @@ public class Main {
 		bAccTwo.printTransactions();
 		bAccThree.printTransactions();
 
+		BankAccount p1Acc = new BankAccount("Barry", 1000);
+		Person p1 = new Person(p1Acc.getName(), 30, p1Acc);
+		Person p2 = new Person("Mary", 28, p1Acc);
+
+		p1.printAccount();
+		p2.printAccount();
 	}
 	
 }
