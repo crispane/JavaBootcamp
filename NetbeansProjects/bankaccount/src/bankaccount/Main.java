@@ -25,6 +25,12 @@ public class Main {
 
 		bAccTwo.printTransactions();
 		bAccThree.printTransactions();
+
+		System.out.println(bAccThree.getAmount());
+		System.out.println(bAccThree.getName());
+		System.out.println(bAccThree.getNumber());
+		System.out.println(bAccTwo.getAmount());
+		System.out.println(BankAccount.getAccountsOpened());
 		
 	}
 	
