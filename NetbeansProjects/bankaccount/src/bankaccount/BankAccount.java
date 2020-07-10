@@ -3,24 +3,22 @@ package bankaccount;
 import java.util.ArrayList;
 
 /*
-Create a class BankAccount with variables
-number :int,
-amount :double,
-name      :String,
-active :boolean,
-transactions: List<String>
-Getters/Setters
-2. Create methods deposit(), withdraw(). Do we need the setter for amount?
-3. Store each action (deposit, withdraw, creation) in the transactions.
-4. Create static/class variable accountsOpened. This variable shows how many accounts have been opened. How to access it??? With an object or class?
-5. Create 3 constructors (default, name-number, all(except transactions)). When created all will be active.
-6. Create 3 BankAccounts in MainClass.
-7. print transactions of 2 bank accounts. (printTransactions???).
- */
-/**
- *
- * @author Chrysanthos Panagakos
- */
+* Create a class BankAccount with variables
+* number :int,
+* amount :double,
+* name   :String,
+* active :boolean,
+* transactions: List<String>
+* Getters/Setters
+* 2. Create methods deposit(), withdraw(). Do we need the setter for amount?
+* 3. Store each action (deposit, withdraw, creation) in the transactions.
+* 4. Create static/class variable accountsOpened. This variable shows how many accounts have been opened. How to access it??? With an object or class?
+* 5. Create 3 constructors (default, name-number, all(except transactions)). When created all will be active.
+* 6. Create 3 BankAccounts in MainClass.
+* 7. print transactions of 2 bank accounts. (printTransactions???).
+*
+* @author Chrysanthos Panagakos
+*/
 public class BankAccount {
 
 	private int number;
