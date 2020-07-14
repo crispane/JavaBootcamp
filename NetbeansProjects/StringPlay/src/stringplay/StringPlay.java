@@ -1,3 +1,5 @@
+
+
 /*Exercises:
 *
 *1. length()
@@ -20,7 +22,7 @@
 *9. substring()
 *    Create a method that accepts a url and gets only the domain name.
 *    http://peoplecert.com
- */
+*/
 package stringplay;
 
 import java.util.Scanner;
@@ -50,13 +52,13 @@ public class StringPlay {
 
 		charAtString(cities, 'A'); // 2
 		System.out.println();
-
+		
 		arrayString(cities, "Th"); // 3
 		System.out.println();
 
 		System.out.println(concatString(a, b)); // 4, 5
 		System.out.println();
-
+		
 		System.out.println(trimString(sc)); // 6
 		System.out.println();
 
@@ -114,20 +116,19 @@ public class StringPlay {
 		}
 		return null;
 	}
-
-	public static void printArray(String[] a) {
-		for (String i : a) {
+	public static void printArray(String [] a){
+		for (String i : a) { 
 			System.out.println(i);
 		}
 	}
 
 	public static String domainName(String a) {
-		for (int i = 0; i < a.length(); i++) {
-			if (a.contains(".com")) {
-				return a.substring(0, a.indexOf(".com") + 4);
-			}
-		}
-		return null;
+		//for (int i = 0; i < a.length(); i++) {
+//			if (a.contains(".com")) {
+				return a.substring(0, a.indexOf("/", 8));
+//			}
+//		}
+//		return null;
 	}
 
 }
