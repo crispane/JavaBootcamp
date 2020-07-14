@@ -102,7 +102,7 @@ public class StringPlay {
 	}
 
 	public static String concatString(String a, String b) {
-		return a.concat(b).toLowerCase();
+		return a.concat(b).toUpperCase();
 	}
 
 	public static String trimString(Scanner sc) {
