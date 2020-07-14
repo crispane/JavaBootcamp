@@ -121,6 +121,7 @@ public class StringPlay {
 		}
 	}
 
+	// implement method to return *any* doain name. indexOf searches for "/" from the 8 char onwards to avoid first two "//"
 	public static String domainName(String a) {
 		return a.substring(0, a.indexOf("/", 8));
 	}
