@@ -123,12 +123,7 @@ public class StringPlay {
 	}
 
 	public static String domainName(String a) {
-		//for (int i = 0; i < a.length(); i++) {
-//			if (a.contains(".com")) {
 				return a.substring(0, a.indexOf("/", 8));
-//			}
-//		}
-//		return null;
 	}
 
 }
