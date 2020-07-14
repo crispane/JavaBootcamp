@@ -114,9 +114,8 @@ public class StringPlay {
 		if (a.contains(", ")) {
 			a = a.replace(", ", ",");
 			return a.split(",");
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	public static String domainName(String a) {
