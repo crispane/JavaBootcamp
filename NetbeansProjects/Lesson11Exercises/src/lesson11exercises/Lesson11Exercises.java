@@ -58,12 +58,8 @@ public class Lesson11Exercises {
 	}
 
 	public static String inverseAnalog(String str) {
-
-		if (str.length() - 1 < 1) 
-			return "";
-		if (str.charAt(0) != str.charAt(str.length() - 1))
-			return "";
-
+		if (str.length() - 1 < 1) return "";
+		if (str.charAt(0) != str.charAt(str.length() - 1)) return "";
 		return str.charAt(0) + inverseAnalog(str.substring(1, str.length() - 1));
 		
 

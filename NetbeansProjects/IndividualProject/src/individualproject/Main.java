@@ -9,7 +9,7 @@ package individualproject;
  *
  * @author f3nix
  */
-public class IndividualProject {
+public class Main {
 
 	/**
 	 * @param args the command line arguments
