@@ -59,13 +59,13 @@ public class Lesson11Exercises {
 
 	public static String inverseAnalog(String str) {
 
-		if (str.length() - 1 < 1) {
+		if (str.length() - 1 < 1) 
 			return "";
-		} else if (str.charAt(0) != str.charAt(str.length() - 1)) {
+		if (str.charAt(0) != str.charAt(str.length() - 1))
 			return "";
-		} else {
-			return str.charAt(0) + inverseAnalog(str.substring(1, str.length() - 1));
-		}
+
+		return str.charAt(0) + inverseAnalog(str.substring(1, str.length() - 1));
+		
 
 	}
 
