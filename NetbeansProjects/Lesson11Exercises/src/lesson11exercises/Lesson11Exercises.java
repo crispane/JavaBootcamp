@@ -39,7 +39,7 @@ public class Lesson11Exercises {
 
 		System.out.println();
 
-		System.out.println("Exercise 5: ");
+		System.out.println("Exercise 6: ");
 		System.out.println(inverseAnalog("abcdedfghedcba")); 
 		System.out.println(inverseAnalog("abccba"));
 		System.out.println(inverseAnalog("abcba"));
