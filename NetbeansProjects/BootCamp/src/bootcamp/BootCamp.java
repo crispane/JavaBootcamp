@@ -12,9 +12,10 @@ import java.time.LocalDate;
  * @author f3nix
  */
 public class BootCamp {
-		private String name;
-		private LocalDate startingDate;
-		private LocalDate endingDate;
+
+	private String name;
+	private LocalDate startingDate;
+	private LocalDate endingDate;
 
 	public BootCamp(String name, LocalDate startingDate, LocalDate endingDate) {
 		this.name = name;
@@ -46,5 +47,16 @@ public class BootCamp {
 		this.endingDate = endingDate;
 	}
 
-		
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(name)
+				.append(" Bootcamp starts at ")
+				.append(startingDate)
+				.append(" and ends at ")
+				.append(endingDate)
+				.append('.');
+		return builder.toString();
+	}
+
 }

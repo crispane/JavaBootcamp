@@ -41,7 +41,7 @@ public class Main {
 		bcList.add(bc2);
 		bcList.add(bc3);
 
-		checkDate(sc, bcList);
+		printAvailableBC(sc, bcList);
 
 	}
 
@@ -52,7 +52,7 @@ public class Main {
 		return bootcamp;
 	}
 
-	public static void checkDate(Scanner sc, List<BootCamp> bc) {
+	public static void printAvailableBC(Scanner sc, List<BootCamp> bc) {
 		LocalDate date = inputDate(sc, "Check available date: ");
 		List<BootCamp> bcCandidates = new ArrayList<>();
 		for (BootCamp bootcamp : bc) {
@@ -61,11 +61,9 @@ public class Main {
 			}
 		}
 		if (!bcCandidates.isEmpty()) {
+			System.out.println("Bootcamps available in " + date + ":");
 			for (BootCamp bootcamp : bcCandidates) {
-				System.out.println("Bootcamp " + bootcamp.getName()
-						+ " will be available in " + date + ". "
-						+ "It starts " + bootcamp.getStartingDate()
-						+ " and ends " + bootcamp.getEndingDate());
+				System.out.println(bootcamp);
 			}
 			System.out.println();
 		} else {
