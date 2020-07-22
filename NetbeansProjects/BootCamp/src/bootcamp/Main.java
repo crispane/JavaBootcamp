@@ -23,14 +23,18 @@ public class Main {
 
 		System.out.println("* Bootcamp date availability check *");
 		System.out.println();
+
 		System.out.println("Enter 1st Bootcamp details");
 		BootCamp bc1 = createBC(sc);
 		System.out.println();
+
 		System.out.println("Enter 2nd Bootcamp details");
 		BootCamp bc2 = createBC(sc);
 		System.out.println();
+
 		System.out.println("Enter 3rd Bootcamp details");
 		BootCamp bc3 = createBC(sc);
+		System.out.println();
 
 		List<BootCamp> bcList = new ArrayList<>();
 		bcList.add(bc1);
@@ -70,7 +74,6 @@ public class Main {
 	}
 
 	public static void checkDate(Scanner sc, List<BootCamp> bc) {
-		System.out.println();
 		LocalDate date = inputDate(sc, "Check available date: ");
 		List<BootCamp> bcCandidates = new ArrayList<>();
 		for (BootCamp bootcamp : bc) {
