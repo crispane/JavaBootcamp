@@ -45,27 +45,6 @@ public class Main {
 
 	}
 
-	public static String inputString(Scanner sc, String message) {
-		System.out.print(message);
-		return sc.next();
-	}
-
-	public static LocalDate inputDate(Scanner sc, String message) {
-		LocalDate date;
-		while (true) {
-			System.out.print(message);
-			String temp = sc.next();
-			try {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				date = LocalDate.parse(temp, formatter);
-				break;
-			} catch (DateTimeParseException e) {
-				System.out.println("Invalid Date.");
-			}
-		}
-		return date;
-	}
-
 	public static BootCamp createBC(Scanner sc) {
 		BootCamp bootcamp = new BootCamp(inputString(sc, "Enter title: "),
 				inputDate(sc, "Enter start date (dd/mm/yyyy): "),
@@ -93,5 +72,26 @@ public class Main {
 			System.out.println("Sorry no bootcamp is available in " + date);
 			System.out.println();
 		}
+	}
+
+	public static String inputString(Scanner sc, String message) {
+		System.out.print(message);
+		return sc.next();
+	}
+
+	public static LocalDate inputDate(Scanner sc, String message) {
+		LocalDate date;
+		while (true) {
+			System.out.print(message);
+			String temp = sc.next();
+			try {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				date = LocalDate.parse(temp, formatter);
+				break;
+			} catch (DateTimeParseException e) {
+				System.out.println("Invalid Date.");
+			}
+		}
+		return date;
 	}
 }
