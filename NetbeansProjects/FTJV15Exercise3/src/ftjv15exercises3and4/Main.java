@@ -24,8 +24,6 @@ public class Main {
 	public static void main(String[] args) {
 		//Exercise 3
 		Map<String, Integer> journeyMap = wordMap("aJourneyToTheInteriorOfTheEarth.txt");
-		System.out.println(" *** Word map of " + "\"aJourneyToTheInteriorOfTheEarth.txt\" ***");
-		System.out.println();
 		System.out.println(journeyMap);
 		wordFinder(journeyMap);
 		wordOccurrences(journeyMap, 500);
@@ -40,6 +38,8 @@ public class Main {
 			File text = new File(directory);
 			Scanner sc = new Scanner(text);
 			String word;
+		System.out.println(" *** Word map of " + "\"" + directory + "\" ***");
+		System.out.println();
 			while (sc.hasNext()) {
 				word = sc.next();
 				if (map.containsKey(word)) {
