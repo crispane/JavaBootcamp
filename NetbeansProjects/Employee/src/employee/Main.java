@@ -39,8 +39,8 @@ public class Main {
 			System.out.print(emp.getName());
 			emp.work();
 
-			if ((emp instanceof Teacher) || (emp instanceof Director)) driveList.add(emp);
-			if ((emp instanceof Receptionist) || (emp instanceof Director)) adviceList.add(emp);
+			if ((emp instanceof Receptionist) || (emp instanceof Director)) driveList.add(emp);
+			if ((emp instanceof Teacher) || (emp instanceof Director)) adviceList.add(emp);
 		}
 
 		System.out.println("Employees that drive: " + driveList);

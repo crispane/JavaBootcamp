@@ -5,10 +5,7 @@
  */
 package individualproject;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -25,6 +22,7 @@ public class Assignment {
 
 	public Assignment() {
 	}
+
 	public Assignment(String title, String description, LocalDate subDateTime, int oralMark, int totalMark) {
 		this.title = title;
 		this.description = description;
@@ -33,30 +31,13 @@ public class Assignment {
 		this.totalMark = totalMark;
 	}
 
-	public static List<Assignment> create(Scanner sc) throws IOException {
-		List<Assignment> list = new ArrayList<>();
-		while (true) {
-			list.add(new Assignment(Main.inputString(sc, "Enter title: "),
-					Main.inputString(sc, "Enter description: "),
-					Main.inputDate(sc, "Enter submission date: "),
-					Main.inputInt(sc, "Enter oral mark: "),
-					Main.inputInt(sc, "Enter total mark: ")));
-			System.out.printf("Do you want to add a new Assignment(Y/n)? ");
-			if (!Main.yes(sc)) {
-				break;
-			}
-		}
-		System.out.print("Thank you. Press Enter to return to main menu.");
-		System.in.read();
-		return list;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
+	public static Assignment create(Scanner sc) {
+		Assignment assignment = new Assignment(Main.inputString(sc, "Enter title: "),
+				Main.inputString(sc, "Enter description: "),
+				Main.inputDate(sc, "Enter submission date: "),
+				Main.inputInt(sc, "Enter oral mark: "),
+				Main.inputInt(sc, "Enter total mark: "));
+		return assignment;
 	}
 
 	public String getDescription() {
@@ -95,6 +76,5 @@ public class Assignment {
 	public String toString() {
 		return "Assignment{" + "title=" + title + ", description=" + description + ", subDateTime=" + subDateTime + ", oralMark=" + oralMark + ", totalMark=" + totalMark + '}';
 	}
-
 
 }

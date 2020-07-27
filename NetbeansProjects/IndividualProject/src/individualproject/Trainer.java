@@ -5,9 +5,6 @@
  */
 package individualproject;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -27,34 +24,11 @@ public class Trainer {
 		this.lastName = lastName;
 		this.subject = subject;
 	}
-
-	public static List<Trainer> create(Scanner sc) throws IOException {
-		List<Trainer> list = new ArrayList<>();
-		while (true) {
-			list.add(new Trainer(Main.inputString(sc, "Enter first name: "), Main.inputString(sc, "Enter last name: "), Main.inputString(sc, "Enter subject: ")));
-			System.out.printf("Do you want to add a new Trainer(Y/n)? ");
-			if (!Main.yes(sc)) {
-				break;
-			}
-		}
-		System.out.print("Thank you. Press Enter to return to main menu.");
-		System.in.read();
-		return list;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public static Trainer create(Scanner sc) {
+		Trainer trainer = new Trainer(Main.inputString(sc, "Enter first name: "),
+				Main.inputString(sc, "Enter last name: "),
+				Main.inputString(sc, "Enter subject: "));
+		return trainer;
 	}
 
 	public String getSubject() {

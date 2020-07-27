@@ -82,11 +82,14 @@ public class Main {
 		System.out.println();
 
 		//Creating course lists
-		Course cs1 = new Course("Maths", ls1);
-		Course cs2 = new Course("Physics", ls2);
-		Course cs3 = new Course("Chemistry", ls3);
+		Course c1 = new Course("Maths");
+		Course c2 = new Course("Physics");
+		Course c3 = new Course("Chemistry");
 
-		List<Course> courses = new ArrayList<>();
+		CourseWithStudents cs1 = new CourseWithStudents(c1, ls1);
+		CourseWithStudents cs2 = new CourseWithStudents(c2, ls2);
+		CourseWithStudents cs3 = new CourseWithStudents(c3, ls3);
+		List<CourseWithStudents> courses = new ArrayList<>();
 		courses.add(cs1);
 		courses.add(cs2);
 		courses.add(cs3);
@@ -94,7 +97,7 @@ public class Main {
 		//Exercise 5-----------------------------
 		System.out.println("Exercise 5----------------");
 		Collections.sort(courses); //sorting courses by number of students
-		for (Course course : courses) {
+		for (CourseWithStudents course : courses) {
 			System.out.println(course);
 
 		}

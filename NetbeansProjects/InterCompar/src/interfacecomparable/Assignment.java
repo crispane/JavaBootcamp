@@ -2,6 +2,7 @@ package interfacecomparable;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 /**
  *
@@ -47,3 +48,13 @@ public class Assignment implements Comparable<Assignment> {
 		return this.submissionDate.compareTo(asm.getSubmissionDate());
 	}
 }
+
+//class sortByGrade implements Comparator<Assignment> {
+//
+//	@Override
+//	public int compare(Assignment a1, Assignment a2) {
+//		return a1.getGrade().compareTo(a2.getGrade());
+//		
+//	}
+//	
+//}
