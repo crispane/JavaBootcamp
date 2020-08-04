@@ -5,16 +5,33 @@
  */
 package ExtraClasses;
 
+import java.util.HashMap;
+
 /**
  *
  * @author f3nix
- * @param <I extends Item>
+ * @param <T>
  */
-public class ItemMap extends Item{
+public class ItemMap<T> extends Item{
+	private HashMap<T,T> map;
+
+	public ItemMap() {
+		this.map = new HashMap<>();
+	}
 
 	@Override
 	public String getName() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
+
+	public HashMap<T,T> getMap() {
+		return map;
+	}
+
+	public void setMap(HashMap<T,T> map) {
+		this.map = map;
+	}
+
+	
 	
 }

@@ -102,15 +102,5 @@ public class Inputs {
 		return choice;
 	}
 
-	// Pauses the program until Enter is pressed
-	public static void pressEnterToReturn(String message) {
-		try {
-			System.out.print("--" + message);
-			System.in.read();
-			System.in.skip(System.in.available());
-		} catch (IOException ex) {
-			System.out.println("IO Error!");
-		}
-	}
 
 }

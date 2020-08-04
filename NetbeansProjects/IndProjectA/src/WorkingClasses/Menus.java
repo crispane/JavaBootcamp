@@ -154,8 +154,9 @@ public class Menus {
 			System.out.println("2. Add Students");
 			System.out.println("3. Add Students to Courses");
 			System.out.println("4. View Students per Course");
+			System.out.println("5. View Courses per Student");
 			System.out.println("0. Return to Main Menu");
-			int choice = Inputs.inputChoice(sc, 4);
+			int choice = Inputs.inputChoice(sc, 5);
 			switch (choice) {
 				case 1:
 					Printers.clearScreen();
@@ -172,6 +173,11 @@ public class Menus {
 				case 4:
 					Printers.clearScreen();
 					Printers.printItemLists("Student", studentsPerCourse);
+					break;
+				case 5:
+					List<Item> coursesPerStudent = new ArrayList<>();
+					coursesPerStudent = Creators.studentsInMultipleCourses(students, courses, studentsPerCourse);
+					Printers.printItemLists("course", coursesPerStudent);
 					break;
 				case 0:
 					break outerloop;

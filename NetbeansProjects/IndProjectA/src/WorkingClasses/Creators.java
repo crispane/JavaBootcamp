@@ -3,7 +3,6 @@ package WorkingClasses;
 import BaseClasses.*;
 import ExtraClasses.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -23,7 +22,7 @@ public class Creators {
 					Inputs.inputDate(sc, "Enter start date: "),
 					Inputs.inputDate(sc, "Enter end date: "));
 			courses.add(course);
-			System.out.printf("Do you want to add a new Course(Y/n)? ");
+			System.out.printf("Do you want to add a new Course? [Y/n] ");
 			if (!Inputs.yes(sc)) {
 				break;
 			}
@@ -39,7 +38,7 @@ public class Creators {
 					Inputs.inputDate(sc, "Enter Date of Birth (dd/mm/yyyy): "),
 					Inputs.inputMoney(sc, "Enter tuition fees: "));
 			students.add(student);
-			System.out.printf("Do you want to add a new Student(y/n)? ");
+			System.out.printf("Do you want to add a new Student? [y/n] ");
 			if (!Inputs.yes(sc)) {
 				break;
 			}
@@ -54,7 +53,7 @@ public class Creators {
 					Inputs.inputString(sc, "Enter last name: "),
 					Inputs.inputString(sc, "Enter subject: "));
 			trainers.add(trainer);
-			System.out.printf("Do you want to add a new Trainer(y/n)? ");
+			System.out.printf("Do you want to add a new Trainer? [y/n] ");
 			if (!Inputs.yes(sc)) {
 				break;
 			}
@@ -71,7 +70,7 @@ public class Creators {
 					Inputs.inputInt(sc, "Enter oral mark: "),
 					Inputs.inputInt(sc, "Enter total mark: "));
 			assignments.add(assignment);
-			System.out.printf("Do you want to add a new Assignment(y/n)? ");
+			System.out.printf("Do you want to add a new Assignment? [y/n] ");
 			if (!Inputs.yes(sc)) {
 				break;
 			}
@@ -79,12 +78,12 @@ public class Creators {
 		return assignments;
 	}
 
-	// A most important method to create Lists of ItemLists
+//	 A most important method to create Lists of ItemLists
 	public static List<Item> addSourceToTarget(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target) {
 		List<Item> returnList = new ArrayList<>();
 		int i;
 		for (Item targetItem : target) {
-			ItemList sourceInTarget = new ItemList();
+			ItemList<Item, Item> sourceInTarget = new ItemList<>();
 			while (true) {
 				i = 0;
 				System.out.println("Select " + sourceType + " to add to " + targetItem);
@@ -92,11 +91,14 @@ public class Creators {
 					i++;
 					System.out.println(i + ". " + sourceItem.getName());
 				}
+				System.out.println("0. ");
 				int choice = Inputs.inputChoice(sc, source.size());
-				if(choice == 0) break;
-				sourceInTarget.add(source.get(choice - 1));
-				sourceInTarget.setItem(targetItem);
-				System.out.print("Add another " + sourceType + " to " + targetType + "?(y/n) ");
+				if (choice == 0) {
+					break;
+				}
+				sourceInTarget.getList().add(source.get(choice - 1));
+				sourceInTarget.setOwner(targetItem);
+				System.out.print("Add another " + sourceType + " to " + targetType + "? [y/n] ");
 				if (!Inputs.yes(sc)) {
 					break;
 				}
@@ -106,14 +108,21 @@ public class Creators {
 		return returnList;
 	}
 
-public static List<Item> studentsInMultipleCourses(List<Item> students, List<Item> studentsPerCourse){
-	HashMap<Item, List<Item>> map = new HashMap<>();
-	for (Item itemlist : studentsPerCourse) {
-		ItemList castedList= (ItemList)itemlist;
+	public static List<Item> studentsInMultipleCourses(List<Item> students, List<Item> courses, List<Item> studentsPerCourse) {
+		List<Item> list = new ArrayList<>();
+		for (Item student : students) {
+			ItemList<Item, Item> studentWithCourses = new ItemList<>();
+			studentWithCourses.setOwner(student);
+			for (Item itemlist : studentsPerCourse) {
+				ItemList castlist = (ItemList) itemlist;
+				if (castlist.getList().contains(student)) {
+					studentWithCourses.getList().add(castlist.getOwner());
+				}
+			}
+			list.add(studentWithCourses);
+		}
+		return list;
 
-		//st.add(((ItemList)itemlist).getItem());
 	}
-	return null;
-}
-	
+
 }

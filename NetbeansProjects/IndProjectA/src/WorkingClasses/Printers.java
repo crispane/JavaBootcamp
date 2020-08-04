@@ -13,15 +13,16 @@ public class Printers {
 	// Prints Lists that contain an ItemList
 	public static void printItemLists(String itemType, List<Item> list) {
 		for (Item itemlist : list) {
-			System.out.println(itemType + "s in " + ((ItemList)itemlist).getItem().getName() + ": ");
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println("              " + ((ItemList)itemlist).getList().get(i));
+			ItemList castlist = (ItemList) itemlist;
+			System.out.println(itemType + "s in " + castlist.getOwner().getName() + ": ");
+			for (int i = 0; i < castlist.getList().size(); i++) {
+				System.out.println("-- " + castlist.getList().get(i));
 			}
-			Inputs.pressEnterToReturn("Press Enter to continue");
+			pressEnterToReturn("Press Enter to continue");
+		}
 			System.out.println("");
 			System.out.println("Done Printing.");
-			Inputs.pressEnterToReturn("Press Enter to return to menu");
-		}
+			pressEnterToReturn("Press Enter to return to menu");
 	}
 
 	// Prints simple Lists
@@ -30,7 +31,7 @@ public class Printers {
 		list.forEach(item -> {
 			System.out.println(item);
 		});
-		Inputs.pressEnterToReturn("Press Enter to return to menu");
+		pressEnterToReturn("Press Enter to return to menu");
 	}
 
 	// Clears the screen (Doesn't work for NetBeans Output. For terminals and command prompts only.)
@@ -44,6 +45,16 @@ public class Printers {
 			}
 		} catch (IOException | InterruptedException ex) {
 			System.out.println("Screen couldn't be cleared. Sorry!");
+		}
+	}
+
+	public static void pressEnterToReturn(String message) {
+		try {
+			System.out.print("::" + message);
+			System.in.read();
+			//System.in.skip(System.in.available());
+		} catch (IOException ex) {
+			System.out.println("IO Error!");
 		}
 	}
 

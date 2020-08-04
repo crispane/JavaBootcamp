@@ -5,36 +5,33 @@ import java.util.ArrayList;
  *
  * @author f3nix
  * @param <T>
+ * @param <S>
  */
 
 // An Item Class that stores Lists of Items
-public class ItemList<T extends Item> extends Item {
+public class ItemList<T extends Item, S extends Item> extends Item {
 	private String name;
-	private Item item;
-	private ArrayList<Item> list;
+	private S Owner;
+	private ArrayList<T> list;
 
 	public ItemList() {
-		this.list = new ArrayList<Item>();
+		this.list = new ArrayList<T>();
 	}
 
-	public Item getItem() {
-		return item;
+	public Item getOwner() {
+		return Owner;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setOwner(S item) {
+		this.Owner = item;
 	}
 
-	public ArrayList<Item> getList() {
+	public ArrayList<T> getList() {
 		return list;
 	}
 
-	public void setList(ArrayList<Item> list) {
+	public void setList(ArrayList<T> list) {
 		this.list = list;
-	}
-
-	public void add(Item item){
-		list.add(item);
 	}
 
 	@Override
