@@ -14,33 +14,35 @@ public class Printers {
 	public static void printItemLists(String itemType, List<Item> list) {
 		for (Item itemlist : list) {
 			ItemList castlist = (ItemList) itemlist;
-			System.out.println(itemType + "s in " + castlist.getOwner().getName() + ": ");
+			System.out.println();
+			System.out.println(itemType + "s in " + castlist.getOwner() + ": ");
+			System.out.println();
 			for (int i = 0; i < castlist.getList().size(); i++) {
 				System.out.println("-- " + castlist.getList().get(i));
 			}
-			pressEnterToReturn("Press Enter to continue");
 		}
-			System.out.println("");
-			System.out.println("Done Printing.");
-			pressEnterToReturn("Press Enter to return to menu");
+		System.out.println();
+		pressEnterToReturn("Press Enter to return ");
 	}
 
 	// Prints simple Lists
 	public static void printList(String itemType, List<Item> list) {
 		System.out.println("All " + itemType + "s: ");
+		System.out.println();
 		list.forEach(item -> {
 			System.out.println(item);
 		});
-		pressEnterToReturn("Press Enter to return to menu");
+		System.out.println();
+		pressEnterToReturn("Press Enter to return ");
 	}
 
 	// Clears the screen (Doesn't work for NetBeans Output. For terminals and command prompts only.)
 	public static void clearScreen() {
 		try {
-			if (System.getProperty("os.name").contains("Windows")) {
+			if (System.getProperty("os.name").contains("Windows")) {				// for Windows systems
 				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 			} else {
-				System.out.print("\u001b[H\u001b[2J");
+				System.out.print("\u001b[H\u001b[2J");								// for Unix systems
 				System.out.flush();
 			}
 		} catch (IOException | InterruptedException ex) {
@@ -48,6 +50,7 @@ public class Printers {
 		}
 	}
 
+	// Pauses the program until Enter key is pressed.
 	public static void pressEnterToReturn(String message) {
 		try {
 			System.out.print("::" + message);

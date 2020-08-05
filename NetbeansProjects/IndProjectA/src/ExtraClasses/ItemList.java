@@ -8,7 +8,8 @@ import java.util.ArrayList;
  * @param <S>
  */
 
-// An Item Class that stores Lists of Items
+// An Item Class that stores a *list* of Items, and an *Owner* for that *list*. It is an Item itself.
+// The most important class of the project that allows for the abstraction of many critical methods. 
 public class ItemList<T extends Item, S extends Item> extends Item {
 	private String name;
 	private S Owner;

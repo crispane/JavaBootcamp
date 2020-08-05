@@ -1,6 +1,5 @@
 package WorkingClasses;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -72,7 +71,7 @@ public class Inputs {
 		//Guard loop until appropriate char is given
 		while (true) {
 			c = sc.next().charAt(0);
-			if (c == 'Y' || c == 'y' || c == '\n') {
+			if (c == 'Y' || c == 'y') {
 				return true;
 			}
 			if (c == 'N' || c == 'n') {
@@ -86,7 +85,7 @@ public class Inputs {
 	public static int inputChoice(Scanner sc, int maxChoice) {
 		int choice;
 		while (true) {
-			System.out.print("Enter choice Number: ");
+			System.out.print("::Enter choice Number: ");
 			if (sc.hasNextInt()) {
 				choice = sc.nextInt();
 				if (choice >= 0 && choice <= maxChoice) {
@@ -101,6 +100,5 @@ public class Inputs {
 		}
 		return choice;
 	}
-
 
 }
