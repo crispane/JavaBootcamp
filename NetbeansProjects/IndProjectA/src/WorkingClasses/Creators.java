@@ -3,6 +3,7 @@ package WorkingClasses;
 import BaseClasses.*;
 import ExtraClasses.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,69 +14,131 @@ import java.util.Scanner;
 public class Creators {
 
 	// A polymorphic method that returns a List of *ItemList*. It combines Source Items with a target Item and keeps them in an *ItemList*. 
-	public static List<Item> combination(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target) {
+	public static List<Item> combination(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target, List<Item> previousList) {
 		List<Item> returnList = new ArrayList<>();
 		int i, j;
 		while (true) {
 			Printers.clearScreen();
 			i = 0;
-			System.out.println("Select " + targetType + ":");				// Print a list of target Items.
+			System.out.println("Select " + targetType + ":");						// Print a list of target Items.
+			System.out.println();
 			for (Item targetItem : target) {
 				i++;
-				System.out.println(i + ". " + targetItem.getName());
+				System.out.printf("%3d. " + targetItem.getName() + "\n", i);
 			}
-			System.out.println("0. Back");
-			int targetChoice = Inputs.inputChoice(sc, target.size());		// Select one.
+			System.out.printf("%3d. Back\n", 0);
+			int targetChoice = Inputs.inputChoice(sc, target.size());				// Select one.
 			if (targetChoice == 0) {
 				break;
 			}
-			ItemList<Item, Item> sourcesInTarget = new ItemList<>();		// Create a ItemList to hold sources and target.
-			List<Item> sourceIterator = new ArrayList<>();
-			for (Item item : source) {										// Create a deep copy of source to iterate with.
-				sourceIterator.add(item);									// This copy is needed because items are removed after
-			}																// selection. Iterator is reset for the next target.
+			ItemList<Item, Item> sourcesInTarget = new ItemList<>();				// Create a ItemList to hold sources and target.
+			List<Item> sourceIterator = new LinkedList<>();							// LinkedList that will iterate and shrink as selections are made. 
+			for (Item item : source) {												// Create a deep copy of source to the Iterator.
+				sourceIterator.add(item);
+			}
+			sourceIterator.removeAll(previousList);									// removes all items that already exist in the previously created list.
 			while (true) {
 				j = 0;
+				Printers.clearScreen();
 				System.out.println();
-				System.out.println("Select " + sourceType + " to add:");
-				for (Item sourceItem : sourceIterator) {					// Print available sources.
+				System.out.println("Select " + sourceType + " to add to " + target.get(targetChoice - 1).getName() + ":");
+				System.out.println();
+				for (Item sourceItem : sourceIterator) {							// Print available sources.
 					j++;
-					System.out.println(j + ". " + sourceItem);
+					System.out.printf("%3d. " + sourceItem + "\n", j);
 				}
-				System.out.println("0. Back");
-				int sourceChoice = Inputs.inputChoice(sc, source.size());	// Select source Item.	
+				System.out.printf("%3d. Back\n", 0);
+				int sourceChoice = Inputs.inputChoice(sc, sourceIterator.size());	// Select source Item.	
 				if (sourceChoice == 0) {
 					break;
 				}
-				sourcesInTarget.setOwner(target.get(targetChoice - 1));		// Set target as *Owner* for to an ItemList *sourcesInTarget*.
-				sourcesInTarget.getList().add(source.get(sourceChoice - 1));// Selected source is passed in the list of of *sourcesInTarget*.
-				sourceIterator.remove(sourceChoice - 1);					// Selected source is temporarily removed from iterator.
+				sourcesInTarget.setOwner(target.get(targetChoice - 1));				// Set target as *Owner* for to an ItemList *sourcesInTarget*.
+				sourcesInTarget.getList().add(sourceIterator.get(sourceChoice - 1));// Selected source is passed in the list of of *sourcesInTarget*.
+				sourceIterator.remove(sourceChoice - 1);							// Selected source is temporarily removed from iterator.
 				System.out.println();
 				System.out.println("-- " + sourceType + " added.");
 				System.out.println();
 			}
-			if (!sourcesInTarget.getList().isEmpty()) {						// All created *sourcesInTarget*, if they are not empty,
-				returnList.add(sourcesInTarget);							// are bundled to a *returnList* and returned.
+			if (!sourcesInTarget.getList().isEmpty()) {								// All created *sourcesInTarget*, if they are not empty,
+				returnList.add(sourcesInTarget);									// are bundled to a *returnList* and returned.
 			}
 		}
 		return returnList;
 	}
 
-	// Specialised method to create a List of students that are in multiple Courses.
-	public static List<Item> studentsInMultipleCourses(List<Item> students, List<Item> studentsPerCourse) {
+	// Specialised method to create a List of students with their Courses. If *multipleCourses* is true it only picks the ones with more that one course.
+	public static List<Item> studentsWithCourses(boolean multipleCourses, List<Item> students, List<Item> studentsPerCourse) {
 		List<Item> returnList = new ArrayList<>();
-		for (Item student : students) {										// Iterate all students.
+		for (Item student : students) {												// Iterate all students.
 			ItemList<Item, Item> studentWithCourses = new ItemList<>();
-			studentWithCourses.setOwner(student); 							// Firstly, a student is passed to an ItemList *studentWithCourses* as the *Owner*.
-			for (Item itemlist : studentsPerCourse) {
-				ItemList castlist = (ItemList) itemlist;
-				if (castlist.getList().contains(student)) {				    // Then they are checked against previously created *studentsPerCourse* ItemList.
-					studentWithCourses.getList().add(castlist.getOwner());  // Matched courses are passed to *studentWithCourses*.
+			studentWithCourses.setOwner(student); 									// At First, a studentChoice is passed to an ItemList *studentWithCourses* as the *Owner*.
+			for (Item course : studentsPerCourse) {									// for each course that contains a list of students
+				ItemList castCourse = (ItemList) course;
+				if (castCourse.getList().contains(student)) {						// check list if studentChoice is there.
+					studentWithCourses.getList().add(castCourse.getOwner());		// Matched courses are passed to *studentWithCourses*.
 				}
 			}
-			if (studentWithCourses.getList().size() > 1) { 					// Finally, all *studentWithCourses* that have more than one course are bundled and returned.
+			if (multipleCourses) {													// if multipleCourses is true
+				if (studentWithCourses.getList().size() > 1) { 						// all *studentWithCourses* that have more than one course are bundled and returned.
+					returnList.add(studentWithCourses);
+				}
+			} else if (!(studentWithCourses.getList().isEmpty())) {					// else return a list that contains all students with one course and above.
 				returnList.add(studentWithCourses);
 			}
+		}
+		return returnList;
+	}
+
+	// Students are assigned with assignments that are only available to their courses.
+	public static List<Item> studentsWithAssignments(Scanner sc, List<Item> coursesWithAssignments, List<Item> studentsWithCourses, List<Item> previousList) {
+		System.out.println("**** CAUTION: Make sure you have added students and assignments to their courses first. ****");
+		Printers.pressEnterToReturn("Press Enter to continue");
+		List<Item> returnList = new ArrayList<>();
+		int i, j;
+		while (true) {
+			Printers.clearScreen();
+			i = 0;
+			System.out.println("Select Student:");
+			System.out.println();
+			for (Item student : studentsWithCourses) {												// Print Students that are registered in a course.
+				i++;
+				System.out.printf("%3d. " + student.getName() + "\n", i);
+			}
+			System.out.printf("%3d. Back\n", 0);
+			int studentChoice = Inputs.inputChoice(sc, studentsWithCourses.size());					// Select one.
+			if (studentChoice == 0) {
+				break;
+			}
+			ItemList<Item, Item> studentWithAsmts = new ItemList<>();								// Create a ItemList to hold the student with his assignments.
+			for (Item course : coursesWithAssignments) {											// Iterate through the list of courses that hold assignments.
+				ItemList castCourse = (ItemList) course;											// Downcast course.
+				ItemList castStudentCourses = (ItemList) studentsWithCourses.get(studentChoice - 1);// Downcast the course list of the selected student.
+				if (castStudentCourses.getList().contains(castCourse.getOwner())) {					// if student is registered in current course...
+					Printers.clearScreen();
+					System.out.println("Select assignments for " + studentsWithCourses.get(studentChoice - 1).getName() + " in course " + castCourse.getOwner().getName());
+					System.out.println();
+					@SuppressWarnings("unchecked")
+					LinkedList<Item> castAssignments = (LinkedList<Item>) castCourse.getList();
+					while (true) {
+						Printers.clearScreen();
+						j = 0;
+						for (Item assignment : castAssignments) {									// ...print available assignments.
+							Assignment castAssignment = (Assignment) assignment;
+							j++;
+							System.out.printf("%3d. " + castAssignment + "\n", j);
+						}
+						System.out.printf("%3d. Back\n", 0);
+						int choice = Inputs.inputChoice(sc, castAssignments.size());					// Pick an assignment.
+						if (choice == 0) {
+							break;
+						}
+						studentWithAsmts.getList().add(castAssignments.get(choice - 1)); 			// Pass selection to an ItemList *studentWithAsmts*.
+						castAssignments.remove(choice - 1);											// Remove assignment from options.
+						studentWithAsmts.setOwner(castStudentCourses.getOwner());					// Set student as owner of ItemList.	
+					}
+				}
+			}
+			returnList.add(studentWithAsmts);
 		}
 		return returnList;
 	}
@@ -143,36 +206,4 @@ public class Creators {
 		}
 		return assignments;
 	}
-
-	public static List<Item> studentsWithAssignments(Scanner sc, List<Item> studentsWithCourses, List<Item> coursesWithAssignments) {
-		List<Item> returnList = new ArrayList<>();
-		for (Item student : studentsWithCourses) {
-			ItemList castStudent = (ItemList) student;
-			for (Item course : coursesWithAssignments) {
-				ItemList castCourse = (ItemList) course;
-				if (castStudent.getList().contains(castCourse.getOwner())) {
-					ItemList<Item, Item> studentWithAsmts = new ItemList<>();
-					System.out.println("Choose assignments for " + castStudent.getName() + " in course " + castCourse.getName());
-					ArrayList<Item> castAssignments = (ArrayList<Item>) castCourse.getList();
-					while (true) {
-						int i = 0;
-						for (Item assignment : castAssignments) {
-							i++;
-							System.out.println(i + ". " + assignment.getName());
-						}
-						int choice = Inputs.inputChoice(sc, castAssignments.size());
-						if (choice == 0) {
-							break;
-						}
-						studentWithAsmts.getList().add(castAssignments.get(choice - 1)); // Selections are passed to an ItemList *studentWithAsmts*.
-						studentWithAsmts.setOwner(castStudent.getOwner());
-					}
-					returnList.add(studentWithAsmts);
-				}
-			}
-
-		}
-		return returnList;
-	}
-
 }
