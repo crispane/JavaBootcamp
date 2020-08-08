@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Creators {
 
 	// A polymorphic method that returns a List of *ItemList*. It combines Source Items with a target Item and keeps them in an *ItemList*. 
-	public static List<Item> combination(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target, List<Item> previousList) {
+	public static List<Item> combinator(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target, List<Item> previousList) {
 		List<Item> returnList = new ArrayList<>();
 		int i, j;
 		while (true) {
@@ -89,9 +89,10 @@ public class Creators {
 		return returnList;
 	}
 
-	// Students are assigned with assignments that are only available to their courses.
+	// Students are assigned with assignments that are only available from their courses.
 	public static List<Item> studentsWithAssignments(Scanner sc, List<Item> coursesWithAssignments, List<Item> studentsWithCourses, List<Item> previousList) {
-		System.out.println("**** CAUTION: Make sure you have added students and assignments to their courses first. ****");
+		System.out.println("--CAUTION: Make sure you have added students AND assignments to their courses first. ");
+		System.out.println();
 		Printers.pressEnterToReturn("Press Enter to continue");
 		List<Item> returnList = new ArrayList<>();
 		int i, j;
@@ -115,12 +116,12 @@ public class Creators {
 				ItemList castStudentCourses = (ItemList) studentsWithCourses.get(studentChoice - 1);// Downcast the course list of the selected student.
 				if (castStudentCourses.getList().contains(castCourse.getOwner())) {					// if student is registered in current course...
 					Printers.clearScreen();
-					System.out.println("Select assignments for " + studentsWithCourses.get(studentChoice - 1).getName() + " in course " + castCourse.getOwner().getName());
-					System.out.println();
 					@SuppressWarnings("unchecked")
-					LinkedList<Item> castAssignments = (LinkedList<Item>) castCourse.getList();
+					LinkedList<Item> castAssignments = (LinkedList<Item>) castCourse.getList();		// ...downcast assignment List and...
 					while (true) {
 						Printers.clearScreen();
+						System.out.println("Select assignments for " + studentsWithCourses.get(studentChoice - 1).getName() + " in course " + castCourse.getOwner().getName());
+						System.out.println();
 						j = 0;
 						for (Item assignment : castAssignments) {									// ...print available assignments.
 							Assignment castAssignment = (Assignment) assignment;
@@ -133,8 +134,10 @@ public class Creators {
 							break;
 						}
 						studentWithAsmts.getList().add(castAssignments.get(choice - 1)); 			// Pass selection to an ItemList *studentWithAsmts*.
-						castAssignments.remove(choice - 1);											// Remove assignment from options.
 						studentWithAsmts.setOwner(castStudentCourses.getOwner());					// Set student as owner of ItemList.	
+						System.out.println();
+						System.out.println("--Assignment added.");
+						Printers.pressEnterToReturn("Press enter to continue...");
 					}
 				}
 			}
@@ -143,10 +146,11 @@ public class Creators {
 		return returnList;
 	}
 
-	// Creators for Base Class ArrayLists 
+	/* Creators for Base Class ArrayLists */
 	public static List<Item> createCourse(Scanner sc) {
 		List<Item> courses = new ArrayList<>();
 		while (true) {
+			sc.nextLine();		// Discard previous \n character
 			Course course = new Course(Inputs.inputString(sc, "Enter title: "),
 					Inputs.inputString(sc, "Enter stream: "),
 					Inputs.inputString(sc, "Enter type: "),
@@ -157,6 +161,10 @@ public class Creators {
 			if (!Inputs.yes(sc)) {
 				break;
 			}
+			System.out.println();
+			System.out.println("--Course added.");
+			Printers.pressEnterToReturn("Press enter to continue...");
+			System.out.println();
 		}
 		return courses;
 	}
@@ -164,6 +172,7 @@ public class Creators {
 	public static List<Item> createStudent(Scanner sc) {
 		List<Item> students = new ArrayList<>();
 		while (true) {
+			sc.nextLine();		// Discard previous \n character
 			Student student = new Student(Inputs.inputString(sc, "Enter first name: "),
 					Inputs.inputString(sc, "Enter last name: "),
 					Inputs.inputDate(sc, "Enter Date of Birth: [dd/mm/yyyy] "),
@@ -180,6 +189,7 @@ public class Creators {
 	public static List<Item> createTrainer(Scanner sc) {
 		List<Item> trainers = new ArrayList<>();
 		while (true) {
+			sc.nextLine();		// Discard previous \n character
 			Trainer trainer = new Trainer(Inputs.inputString(sc, "Enter first name: "),
 					Inputs.inputString(sc, "Enter last name: "),
 					Inputs.inputString(sc, "Enter subject: "));
@@ -195,6 +205,7 @@ public class Creators {
 	public static List<Item> createAssignment(Scanner sc) {
 		List<Item> assignments = new ArrayList<>();
 		while (true) {
+			sc.nextLine();		// Discard previous \n character
 			Assignment assignment = new Assignment(Inputs.inputString(sc, "Enter title: "),
 					Inputs.inputString(sc, "Enter description: "),
 					Inputs.inputDate(sc, "Enter submission date: [dd/mm/yyyy] "));
@@ -206,4 +217,5 @@ public class Creators {
 		}
 		return assignments;
 	}
+
 }
