@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 public class Student extends Item{
 
@@ -59,7 +59,7 @@ public class Student extends Item{
 
 	@Override
 	public String toString() {
-		return "Student{" + "firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", tuitionFees=" + tuitionFees + '}';
+		return String.format("%-15s%-15sDOB: %-15s\u20ac%-6.2f",firstName, lastName, dateOfBirth, tuitionFees);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package ExtraClasses;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 
 // Wrapper class for all Base Classes (*Course*, *Student*, *Assignment*, *Trainer*) and *ItemList*

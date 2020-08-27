@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 public class Assignment extends Item {
 
@@ -84,7 +84,7 @@ public class Assignment extends Item {
 
 	@Override
 	public String toString() {
-		return "Assignment{" + "title=" + title + ", description=" + description + ", subDateTime=" + submissionDate + ", oralMark=" + oralMark + ", totalMark=" + totalMark + '}';
+		return String.format("%-25s Due: %-15s\n--Description: %s\n", title, submissionDate, description);
 	}
 
 	@Override

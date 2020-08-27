@@ -1,22 +1,21 @@
 package ExtraClasses;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  * @param <T>
  * @param <S>
  */
 
-// An Item Class that stores a *list* of Items, and an *Owner* for that *list*. It is an Item itself.
-// The most important class of the project that allows for the abstraction of many critical methods. 
+// A Class that stores a *list* of Items, and an *Owner* for that *list*. It is an Item itself.
+// A key class for the project that allows for the abstraction of critical methods. 
 public class ItemList<T extends Item, S extends Item> extends Item {
-	private String name;
 	private S Owner;
-	private ArrayList<T> list;
+	private LinkedList<T> list;
 
 	public ItemList() {
-		this.list = new ArrayList<T>();
+		this.list = new LinkedList<>();
 	}
 
 	public Item getOwner() {
@@ -27,16 +26,16 @@ public class ItemList<T extends Item, S extends Item> extends Item {
 		this.Owner = item;
 	}
 
-	public ArrayList<T> getList() {
+	public LinkedList<T> getList() {
 		return list;
 	}
 
-	public void setList(ArrayList<T> list) {
+	public void setList(LinkedList<T> list) {
 		this.list = list;
 	}
 
 	@Override
 	public String getName() {
-		return name;
+		return Owner.getName();
 	}
 }

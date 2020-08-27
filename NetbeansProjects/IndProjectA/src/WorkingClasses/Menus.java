@@ -1,86 +1,114 @@
 package WorkingClasses;
 
+import BaseClasses.*;
 import ExtraClasses.Item;
+import RunClasses.SyntheticData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 public class Menus {
 
 	// Base Menu
-	public static void BootCamp() {
-		try {
-			Scanner sc = new Scanner(System.in);
-			List<Item> courses = new ArrayList<>();
-			List<Item> assignments = new ArrayList<>();
-			List<Item> students = new ArrayList<>();
-			List<Item> trainers = new ArrayList<>();
-			List<Item> studentsPerCourse = new ArrayList<>();
-			List<Item> trainersPerCourse = new ArrayList<>();
-			List<Item> assignmentsPerCourse = new ArrayList<>();
-			List<Item> assignmentsPerStudent = new ArrayList<>();
-			// Unfortunately methods need to return one thing only. 
-			// In the submenus that need to return 2 or more items, I packed the items in a returnList and returned that returnList.
-			// This returnList is then passed to a *bufferlist*. (See lines 40 and 51)
-			// A *bufferlist* is necessary, in order to distribute returned values from the menus.
-			List<List<Item>> bufferlist;
-			while (true) {
-				Printers.clearScreen();
-				System.out.println("*** Bootcamp Registry Program ***");
-				System.out.println("1. Courses");
-				System.out.println("2. Trainers");
-				System.out.println("3. Students");
-				System.out.println("4. Assignments");
-				System.out.println("0. Exit Program");
-				int choice = Inputs.inputChoice(sc, 4);
-				switch (choice) {
-					case 1:
-						Printers.clearScreen();
-						bufferlist = courseMenu(sc, courses);
-						courses = bufferlist.get(0);
-						break;
-					case 2:
-						Printers.clearScreen();
-						bufferlist = trainerMenu(sc, trainers, courses, trainersPerCourse);
-						trainers = bufferlist.get(0);
-						trainersPerCourse = bufferlist.get(1);
-						break;
-					case 3:
-						Printers.clearScreen();
-						bufferlist = studentMenu(sc, students, courses, studentsPerCourse);
-						students = bufferlist.get(0);
-						studentsPerCourse = bufferlist.get(1);
-						break;
-					case 4:
-						Printers.clearScreen();
-						bufferlist = assignmentMenu(sc, assignments, courses, assignmentsPerCourse, students, assignmentsPerStudent);
-						assignments = bufferlist.get(0);
-						assignmentsPerCourse = bufferlist.get(1);
-						assignmentsPerStudent = bufferlist.get(2);
-						break;
-					case 0:
-						System.exit(0);
-						break;
-					default:
-						break;
-				}
-			}
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("");
+	public static void BootMenu() {
+//		try {
+		Scanner sc = new Scanner(System.in);
+		List<Item> courses;
+		List<Item> assignments;
+		List<Item> students;
+		List<Item> trainers;
+		List<Item> studentsPerCourse;
+		List<Item> coursesPerStudent;
+		List<Item> trainersPerCourse;
+		List<Item> assignmentsPerCourse;
+		List<Item> assignmentsPerStudent;
+
+		Printers.clearScreen();
+		System.out.println("   ****************************************************");
+		System.out.println("   You are about to start the Bootcamp Registry Program");
+		System.out.println("   -- For optimal presentation please use a terminal --");
+		System.out.println();
+		System.out.print("Would you like to populate lists with Synthetic Data? [y/n] ");
+		if (Inputs.yes(sc)) {
+			courses = SyntheticData.synthCourses();
+			students = SyntheticData.synthStudents();
+			trainers = SyntheticData.synthTrainers();
+			assignments = SyntheticData.synthAssignments();
+		} else {
+			courses = new ArrayList<>();
+			assignments = new ArrayList<>();
+			students = new ArrayList<>();
+			trainers = new ArrayList<>();
 		}
+		studentsPerCourse = new ArrayList<>();
+		coursesPerStudent = new ArrayList<>();
+		trainersPerCourse = new ArrayList<>();
+		assignmentsPerCourse = new ArrayList<>();
+		assignmentsPerStudent = new ArrayList<>();
+		List<List<Item>> bufferlist;
+		while (true) {
+			Printers.clearScreen();
+			System.out.println("*** Bootcamp Registry Program ***");
+			System.out.println();
+			System.out.println("1. Courses");
+			System.out.println("2. Trainers");
+			System.out.println("3. Students");
+			System.out.println("4. Assignments");
+			System.out.println("5. Help");
+			System.out.println("0. Exit Program");
+			int choice = Inputs.inputChoice(sc, 5);
+			switch (choice) {
+				case 1:
+					Printers.clearScreen();
+					courses = courseMenu(sc, courses).get(0);
+					break;
+				case 2:
+					Printers.clearScreen();
+					bufferlist = trainerMenu(sc, trainers, courses, trainersPerCourse);
+					trainers = bufferlist.get(0);
+					trainersPerCourse = bufferlist.get(1);
+					break;
+				case 3:
+					Printers.clearScreen();
+					bufferlist = studentMenu(sc, students, courses, studentsPerCourse, coursesPerStudent);
+					students = bufferlist.get(0);
+					studentsPerCourse = bufferlist.get(1);
+					break;
+				case 4:
+					Printers.clearScreen();
+					bufferlist = assignmentMenu(sc, assignments, courses, assignmentsPerCourse, students, assignmentsPerStudent, studentsPerCourse, coursesPerStudent);
+					assignments = bufferlist.get(0);
+					assignmentsPerCourse = bufferlist.get(1);
+					assignmentsPerStudent = bufferlist.get(2);
+					break;
+				case 5:
+					Printers.clearScreen();
+					Printers.ExercisesIndex();
+					break;
+				case 0:
+					System.exit(0);
+					break;
+				default:
+					break;
+			}
+		}
+//		} catch (IndexOutOfBoundsException e) {
+//			System.out.println("");
+//		}
 	}
 
-	// Class submenus
+	/* Base Class submenus */
 	public static List<List<Item>> courseMenu(Scanner sc, List<Item> courses) {
 		List<List<Item>> returnList = new ArrayList<>();
 		outerloop:
 		while (true) {
 			Printers.clearScreen();
-				System.out.println("*** Bootcamp Registry Program / Courses ***");
+			System.out.println("*** Bootcamp Registry Program / Courses ***");
+			System.out.println();
 			System.out.println("1. View Courses");
 			System.out.println("2. Create Courses");
 			System.out.println("0. Return to Main Menu");
@@ -88,10 +116,18 @@ public class Menus {
 			switch (choice) {
 				case 1:
 					Printers.clearScreen();
-					Printers.printList("course", courses);
+					System.out.println("*** Bootcamp Registry Program / Course List ***");
+					System.out.println();
+					List<Course> castCourses = new ArrayList<>(); // Downcasting to prepare for print
+					for (Item course : courses) {
+						castCourses.add((Course) course);
+					}
+					Printers.printList("course", castCourses);
 					break;
 				case 2:
 					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Create Courses ***");
+					System.out.println();
 					courses.addAll(Creators.createCourse(sc));
 					break;
 				case 0:
@@ -109,7 +145,8 @@ public class Menus {
 		outerloop:
 		while (true) {
 			Printers.clearScreen();
-				System.out.println("*** Bootcamp Registry Program / Trainers ***");
+			System.out.println("*** Bootcamp Registry Program / Trainers ***");
+			System.out.println();
 			System.out.println("1. View Trainers");
 			System.out.println("2. Create Trainers");
 			System.out.println("3. Add Trainers To Courses");
@@ -119,21 +156,33 @@ public class Menus {
 			switch (choice) {
 				case 1:
 					Printers.clearScreen();
-					Printers.printList("trainer", trainers);
+					System.out.println("*** Bootcamp Registry Program / Trainers List ***");
+					System.out.println();
+					List<Trainer> castTrainers = new ArrayList<>(); // Downcasting to prepare for print
+					for (Item trainer : trainers) {
+						castTrainers.add((Trainer) trainer);
+					}
+					Printers.printList("trainer", castTrainers);
 					break;
 				case 2:
 					while (true) {
 						Printers.clearScreen();
+						System.out.println("*** Bootcamp Registry Program / Create Trainers ***");
+						System.out.println();
 						trainers.addAll(Creators.createTrainer(sc));
 						break;
 					}
 					break;
 				case 3:
 					Printers.clearScreen();
-					trainersPerCourse = Creators.addSourcesToTarget("trainer", "course", sc, trainers, courses);
+					System.out.println("*** Bootcamp Registry Program / Add Trainers to Courses ***");
+					System.out.println();
+					trainersPerCourse = Creators.combinator("trainer", "course", sc, trainers, courses);
 					break;
 				case 4:
 					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Trainers Per Course ***");
+					System.out.println();
 					Printers.printItemLists("Trainer", trainersPerCourse);
 					break;
 				case 0:
@@ -147,38 +196,54 @@ public class Menus {
 		return returnList;
 	}
 
-	public static List<List<Item>> studentMenu(Scanner sc, List<Item> students, List<Item> courses, List<Item> studentsPerCourse) {
+	public static List<List<Item>> studentMenu(Scanner sc, List<Item> students, List<Item> courses, List<Item> studentsPerCourse, List<Item> coursesPerStudent) {
 		List<List<Item>> returnList = new ArrayList<>();
 		outerloop:
 		while (true) {
 			Printers.clearScreen();
-				System.out.println("*** Bootcamp Registry Program / Students ***");
+			System.out.println("*** Bootcamp Registry Program / Students ***");
+			System.out.println();
 			System.out.println("1. View Students");
 			System.out.println("2. Create Students");
 			System.out.println("3. Add Students to Courses");
 			System.out.println("4. View Students per Course");
-			System.out.println("5. View Students with multiCourses");
+			System.out.println("5. View Students with multiple Courses");
 			System.out.println("0. Return to Main Menu");
 			int choice = Inputs.inputChoice(sc, 5);
 			switch (choice) {
 				case 1:
 					Printers.clearScreen();
-					Printers.printList("student", students);
+					System.out.println("*** Bootcamp Registry Program / Students List ***");
+					System.out.println();
+					List<Student> castStudents = new ArrayList<>(); // Downcasting to prepare for print
+					for (Item student : students) {
+						castStudents.add((Student) student);
+					}
+					Printers.printList("student", castStudents);
 					break;
 				case 2:
 					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Create Students ***");
+					System.out.println();
 					students.addAll(Creators.createStudent(sc));
 					break;
 				case 3:
 					Printers.clearScreen();
-					studentsPerCourse = Creators.addSourcesToTarget("student", "course", sc, students, courses);
+					System.out.println("*** Bootcamp Registry Program / Add students to course ***");
+					System.out.println();
+					studentsPerCourse = Creators.combinator("student", "course", sc, students, courses);
 					break;
 				case 4:
 					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Students Per Course ***");
+					System.out.println();
 					Printers.printItemLists("Student", studentsPerCourse);
 					break;
 				case 5:
-					List<Item> coursesPerStudent = Creators.studentsInMultipleCourses(students, studentsPerCourse);
+					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Students with multiple Courses ***");
+					System.out.println();
+					coursesPerStudent = Creators.studentsWithCourses(true, students, studentsPerCourse);
 					Printers.printItemLists("course", coursesPerStudent);
 					break;
 				case 0:
@@ -192,47 +257,71 @@ public class Menus {
 		return returnList;
 	}
 
-	public static List<List<Item>> assignmentMenu(Scanner sc, List<Item> assignments, List<Item> courses, List<Item> assignmentsPerCourse, List<Item> students, List<Item> assignmentsPerStudent) {
+	public static List<List<Item>> assignmentMenu(Scanner sc, List<Item> assignments, List<Item> courses, List<Item> assignmentsPerCourse, List<Item> students, List<Item> assignmentsPerStudent, List<Item> studentsPerCourse, List<Item> coursesPerStudent) {
 		List<List<Item>> returnList = new ArrayList<>();
 		outerloop:
 		while (true) {
 			Printers.clearScreen();
-				System.out.println("*** Bootcamp Registry Program / Assignments ***");
-			System.out.println("1. View assignments");
-			System.out.println("2. Create assignments");
-			System.out.println("3. Add Assignments to Course");
+			System.out.println("*** Bootcamp Registry Program / Assignments ***");
+			System.out.println();
+			System.out.println("1. View Assignments");
+			System.out.println("2. Create Assignments");
+			System.out.println("3. Add Assignments to Courses");
 			System.out.println("4. View Assignments per Course");
-			System.out.println("5. Add Assignments to student");
+			System.out.println("5. Add Assignments to Students");
 			System.out.println("6. View Assignments per Student");
+			System.out.println("7. Check For Deadlines");
 			System.out.println("0. Return to Main Menu");
-			int choice = Inputs.inputChoice(sc, 6);
+			int choice = Inputs.inputChoice(sc, 7);
 			switch (choice) {
 				case 1:
 					Printers.clearScreen();
-					Printers.printList("assignment", assignments);
+					System.out.println("*** Bootcamp Registry Program / Assignments List ***");
+					System.out.println();
+					List<Assignment> castAssignments = new ArrayList<>(); // Downcasting to prepare for print
+					for (Item assignment : assignments) {
+						castAssignments.add((Assignment) assignment);
+					}
+					Printers.printList("assignment", castAssignments);
 					break;
 				case 2:
 					while (true) {
 						Printers.clearScreen();
+						System.out.println("*** Bootcamp Registry Program / Create Assignments ***");
+						System.out.println();
 						assignments.addAll(Creators.createAssignment(sc));
 						break;
 					}
 					break;
 				case 3:
 					Printers.clearScreen();
-					assignmentsPerCourse = Creators.addSourcesToTarget("assignment", "course", sc, assignments, courses);
+					System.out.println("*** Bootcamp Registry Program / Add Assignments to Courses ***");
+					System.out.println();
+					assignmentsPerCourse = Creators.combinator("assignment", "course", sc, assignments, courses);
 					break;
 				case 4:
 					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Assignments Per Course ***");
+					System.out.println();
 					Printers.printItemLists("Assignment", assignmentsPerCourse);
 					break;
 				case 5:
 					Printers.clearScreen();
-					assignmentsPerStudent = Creators.addSourcesToTarget("assignment", "student", sc, assignments, students);
+					System.out.println("*** Bootcamp Registry Program / Add Assignments to Students ***");
+					System.out.println();
+					coursesPerStudent = Creators.studentsWithCourses(false, students, studentsPerCourse);
+					assignmentsPerStudent = Creators.studentsWithAssignments(sc, assignmentsPerCourse, coursesPerStudent, assignmentsPerStudent);
 					break;
 				case 6:
 					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Assignments Per Student ***");
+					System.out.println();
 					Printers.printItemLists("Assignment", assignmentsPerStudent);
+					break;
+				case 7:
+					Printers.clearScreen();
+					System.out.println("*** Bootcamp Registry Program / Assignment Deadlines ***");
+					Printers.subWeek(sc, assignmentsPerStudent);
 					break;
 				case 0:
 					break outerloop;

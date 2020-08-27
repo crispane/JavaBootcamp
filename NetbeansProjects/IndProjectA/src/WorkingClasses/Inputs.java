@@ -8,14 +8,14 @@ import java.util.Scanner;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 public class Inputs {
 
-	// methods for inputing DataTypes
+	/* methods for inputing DataTypes */
 	public static String inputString(Scanner sc, String message) {
 		System.out.print(message);
-		String temp = sc.next();
+		String temp = sc.nextLine();
 		return temp;
 	}
 
@@ -50,8 +50,9 @@ public class Inputs {
 		return date;
 	}
 
+	// BigDecimal for money
 	public static BigDecimal inputMoney(Scanner sc, String message) {
-		BigDecimal amount = new BigDecimal("000");
+	BigDecimal amount = new BigDecimal("000");
 		while (true) {
 			System.out.printf(message);
 			if (sc.hasNextBigDecimal()) {
@@ -77,7 +78,7 @@ public class Inputs {
 			if (c == 'N' || c == 'n') {
 				return false;
 			}
-			System.out.print("Y or N ?");
+			System.out.print("y or n ?");
 		}
 	}
 
@@ -85,17 +86,12 @@ public class Inputs {
 	public static int inputChoice(Scanner sc, int maxChoice) {
 		int choice;
 		while (true) {
-			System.out.print("::Enter choice Number: ");
-			if (sc.hasNextInt()) {
-				choice = sc.nextInt();
-				if (choice >= 0 && choice <= maxChoice) {
-					break;
-				} else {
-					System.out.println("Choice must be between 0 and " + maxChoice + ".");
-				}
+			System.out.println();
+			choice = inputInt(sc, "::Enter choice Number: ");
+			if (choice >= 0 && choice <= maxChoice) {
+				break;
 			} else {
-				System.out.println("Number must be an integer.");
-				sc.next();
+				System.out.println("Choice must be between 0 and " + maxChoice + ".");
 			}
 		}
 		return choice;

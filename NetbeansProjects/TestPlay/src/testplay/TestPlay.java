@@ -1,18 +1,16 @@
-package indprojecta;
-
-import WorkingClasses.Menus;
+package testplay;
 
 /**
  *
  * @author f3nix
  */
-public class Main {
+public class TestPlay {
 
 	/**
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		Menus.BootCamp();
+		// TODO code application logic here
 	}
 	
 }

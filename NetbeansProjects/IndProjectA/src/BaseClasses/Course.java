@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 public class Course extends Item{
 
@@ -68,7 +68,7 @@ public class Course extends Item{
 
 	@Override
 	public String toString() {
-		return "Course{" + "title=" + title + ", stream=" + stream + ", type=" + type + ", startDate=" + startDate + ", endDate=" + endDate + '}';
+		return String.format("%-25s%-15s%-15sStarts: %-15sEnds: %-15s",title, stream, type, startDate, endDate);
 	}
 	
 	@Override

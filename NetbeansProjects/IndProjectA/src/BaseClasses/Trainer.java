@@ -4,7 +4,7 @@ import ExtraClasses.Item;
 
 /**
  *
- * @author f3nix
+ * @author Chrysanthos Panagakos
  */
 public class Trainer extends Item{
 	private String firstName;
@@ -30,7 +30,7 @@ public class Trainer extends Item{
 
 	@Override
 	public String toString() {
-		return "Trainer{" + "firstName=" + firstName + ", lastName=" + lastName + ", subject=" + subject + '}';
+		return String.format("%-15s%-15sSub: %-15s",firstName, lastName, subject);
 	}
 
 	@Override

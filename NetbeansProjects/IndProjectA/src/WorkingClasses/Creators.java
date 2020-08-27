@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Creators {
 
 	// A polymorphic method that returns a List of *ItemList*. It combines Source Items with a target Item and keeps them in an *ItemList*. 
-	public static List<Item> combinator(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target, List<Item> previousList) {
+	public static List<Item> combinator(String sourceType, String targetType, Scanner sc, List<Item> source, List<Item> target) {
 		List<Item> returnList = new ArrayList<>();
 		int i, j;
 		while (true) {
@@ -36,7 +36,7 @@ public class Creators {
 			for (Item item : source) {												// Create a deep copy of source to the Iterator.
 				sourceIterator.add(item);
 			}
-			sourceIterator.removeAll(previousList);									// removes all items that already exist in the previously created list.
+//			sourceIterator.removeAll(previousList);									// removes all items that already exist in the previously created list.
 			while (true) {
 				j = 0;
 				Printers.clearScreen();
@@ -141,7 +141,9 @@ public class Creators {
 					}
 				}
 			}
-			returnList.add(studentWithAsmts);
+			if (!studentWithAsmts.getList().isEmpty()) {											// Pass studentWithAsmts only if it is not empty
+				returnList.add(studentWithAsmts);
+			}
 		}
 		return returnList;
 	}
