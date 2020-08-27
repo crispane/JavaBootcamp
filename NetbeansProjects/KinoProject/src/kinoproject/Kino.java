@@ -19,13 +19,13 @@ public class Kino implements IKino {
 	private Integer moneyBet;
 	private Integer numberOfDraws;
 	private Integer totalEarnings = 0;
-	final private int MIN = 1; 			// Minimum KINO number
-	final private int MAX = 80;			// Maximum KINO number
+	final private int MIN = 1; 			
+	final private int MAX = 80;		
 
 	public Kino() {
-	} 			// Default constructor
+	} 									
 
-	public Kino(Integer moneyBet, Integer numberOfDraws) { // Constructor
+	public Kino(Integer moneyBet, Integer numberOfDraws) { 
 		this.moneyBet = moneyBet;
 		this.numberOfDraws = numberOfDraws;
 	}
@@ -85,8 +85,6 @@ public class Kino implements IKino {
 	@Override
 	public Integer numberOfGames(Scanner sc) {
 		Integer games = 1;
-//		System.out.print("Do you want to play more than one games? [y/n] ");
-//		if (yes(sc)) {
 		System.out.println("");
 		System.out.println("Number of games:");
 		System.out.println("");
@@ -138,7 +136,6 @@ public class Kino implements IKino {
 			default:
 				break;
 		}
-//		}
 		return games;
 	}
 
