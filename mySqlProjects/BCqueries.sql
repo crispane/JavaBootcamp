@@ -56,7 +56,10 @@ SELECT * FROM classes;
 SELECT * FROM students;
 SELECT * FROM assignments;
 SELECT * FROM assignments_results;
-SELECT * FROM projects_results;
+SELECT 
+    *
+FROM
+    projects_results;
 
 SELECT students.student_id, student_name, class_title, assignment_title, mark
 FROM assignments_results
